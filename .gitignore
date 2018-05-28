@@ -3,3 +3,9 @@
 
 # Document and reference
 doc/
+
+# Tools
+tools/
+
+# VM
+vm/
