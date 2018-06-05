@@ -10,3 +10,6 @@ tools/
 # VM
 vm/
 弘毅班os设计.doc
+
+# CPP
+*.out
