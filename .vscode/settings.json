@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "iostream": "cpp",
-        "cstdio": "cpp"
+        "cstdio": "cpp",
+        "ostream": "cpp",
+        "exception": "cpp"
     }
 }
