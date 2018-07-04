@@ -57,7 +57,7 @@ class ProcessorDeque:
 
             process = self.process.popleft()
             process.run()
-            print('Process: %3d;\t status: Running;\t Effective run time: %d;\t Already run time: %d;' %
+            print('Process: %3d;\t status: Run;\t Effective run time: %d;\t Already run time: %d;' %
                 (process.label,
                  process.effective_run_times,
                  process.already_run_times))
@@ -72,55 +72,55 @@ class ProcessorDeque:
         self.show_all_finished_process()
 
 
-class Processor:
-    def __init__(self):
-        self.process = []
-        self.pointer = 0
-
-    def pointer_add(self):
-        self.pointer = (self.pointer + 1) % len(self.process)
-
-    def load_file(self, filename):
-        with open(filename, 'r') as fi:
-            lines = fi.readlines()
-        count = 0
-        for line in lines:
-            process = Process(int(line))
-            process.label = count
-            count += 1
-            self.process.append(process)
-
-    def show_all_process(self):
-        for process in self.process:
-            print(
-                'Process: %d;\t status: %s;\t Effective run time: %d;\t Already run time: %d;' %
-                (process.label, process.status,
-                 process.effective_run_times,
-                 process.already_run_times)
-            )
-
-    def check_all_end(self):
-        for process in self.process:
-            if process.status == Status.Ready:
-                return False
-        return True
-
-    def run_process(self):
-        for process_num in range(len(self.process)):
-            if process_num == self.pointer:
-                self.process[process_num].run()
-            else:
-                if self.process[process_num].status == Status.Ready:
-                    self.process[process_num].wait()
-
-    def start(self):
-        while not self.check_all_end():
-            if self.process[self.pointer].status == Status.Ready:
-                self.run_process()
-                self.pointer_add()
-                self.show_all_process()
-            else:
-                self.pointer_add()
+# class Processor:
+#     def __init__(self):
+#         self.process = []
+#         self.pointer = 0
+#
+#     def pointer_add(self):
+#         self.pointer = (self.pointer + 1) % len(self.process)
+#
+#     def load_file(self, filename):
+#         with open(filename, 'r') as fi:
+#             lines = fi.readlines()
+#         count = 0
+#         for line in lines:
+#             process = Process(int(line))
+#             process.label = count
+#             count += 1
+#             self.process.append(process)
+#
+#     def show_all_process(self):
+#         for process in self.process:
+#             print(
+#                 'Process: %d;\t status: %s;\t Effective run time: %d;\t Already run time: %d;' %
+#                 (process.label, process.status,
+#                  process.effective_run_times,
+#                  process.already_run_times)
+#             )
+#
+#     def check_all_end(self):
+#         for process in self.process:
+#             if process.status == Status.Ready:
+#                 return False
+#         return True
+#
+#     def run_process(self):
+#         for process_num in range(len(self.process)):
+#             if process_num == self.pointer:
+#                 self.process[process_num].run()
+#             else:
+#                 if self.process[process_num].status == Status.Ready:
+#                     self.process[process_num].wait()
+#
+#     def start(self):
+#         while not self.check_all_end():
+#             if self.process[self.pointer].status == Status.Ready:
+#                 self.run_process()
+#                 self.pointer_add()
+#                 self.show_all_process()
+#             else:
+#                 self.pointer_add()
 
 
 class Process:

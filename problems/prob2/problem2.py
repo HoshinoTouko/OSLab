@@ -27,8 +27,10 @@ class Memory:
         os.system('cls')
 
     def add_process(self, require_mem):
+        given = False
         for block in self.blocks:
             if block.free_space >= require_mem:
+                given = True
                 process = Process(block.start_addr, require_mem)
                 self.processes.append(process)
                 block.start_addr += require_mem
@@ -37,7 +39,8 @@ class Memory:
                       (self.blocks.index(block), process.start_addr, process.require_mem))
                 self.auto_adjust()
                 break
-        print('----------- No space can be given.')
+        if not given:
+            print('----------- No space can be given.')
 
     def release_process(self, release_index):
         if release_index > len(self.processes)-1:

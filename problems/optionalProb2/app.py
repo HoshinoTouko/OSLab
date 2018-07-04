@@ -22,7 +22,7 @@ class Producer(threading.Thread):
         s1 = s1 - 1
         while s1 < 0:
             self.status = "wait"
-            self.reason = "the product list is full."
+            self.reason = "Product list full."
             time.sleep(1)
         self.status = "run"
         self.reason = None
@@ -32,7 +32,7 @@ class Producer(threading.Thread):
         s2 = s2 + 1
         while s2 > 10:
             self.status = "wait"
-            self.reason = "the product list is full"
+            self.reason = "Product list full"
             time.sleep(1)
 
     def put(self, C):
@@ -73,7 +73,7 @@ class Consumer(threading.Thread):
         s2 = s2 - 1
         while s2 < 0:
             self.status = "wait"
-            self.reason = "the product list is empty."
+            self.reason = "Product list empty."
             time.sleep(1)
         self.status = "run"
         self.reason = None
@@ -83,7 +83,7 @@ class Consumer(threading.Thread):
         s1 = s1 + 1
         while s1 > 10:
             self.status = "wait"
-            self.reason = "the product list is empty"
+            self.reason = "Product list empty"
             time.sleep(1)
         self.status = "finish"
         self.reason = None
